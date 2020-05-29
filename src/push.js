@@ -3,7 +3,7 @@ const { file, wait, done } = require('./shared')
 
 const add = () => shell.exec('git add .')
 const commit = () => shell.exec(`git commit -m "${new Date().toLocaleString('en-GB', { timeZone: 'Europe/Stockholm' })}"`)
-const push = () => shell.exec('git push origin master')
+const push_code = () => shell.exec('git push origin master')
 
 const copy_from_below = () => {
   shell.cd('..')
@@ -13,13 +13,13 @@ const copy_from_below = () => {
   return wait()
 }
 
-const init = () =>
-  copy_from_below()
-    .then(add)
-    .then(wait)
-    .then(commit)
-    .then(wait)
-    .then(push)
-    .then(done)
+const push = () => copy_from_below()
+  .then(add)
+  .then(wait)
+  .then(commit)
+  .then(wait)
+  .then(push_code)
+  .then(done)
 
-init()
+
+module.exports = { push }
