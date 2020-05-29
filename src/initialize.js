@@ -12,6 +12,8 @@ const go_back = () => shell.cd('terraria-syncv2')
 
 const is_new_timestamp = timestamp => {
   const { mtime } = get_file_timestamp()
+  if(mtime.toString().includes('9:29')) return false
+  
   return mtime.toString() !== timestamp.toString()
 }
 
