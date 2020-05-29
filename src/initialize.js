@@ -11,11 +11,10 @@ const get_file_timestamp = () => fs.statSync('../' + file + '.wld')
 
 const is_new_timestamp = timestamp => {
   const { mtime } = get_file_timestamp()
-  return mtime !== timestamp
+  return mtime.toString() !== timestamp.toString()
 }
 
 const initialize = () => {
-  
   const { mtime } = get_file_timestamp()
   console.log(`start time: ${mtime}`)
   start_terraria()
@@ -23,7 +22,6 @@ const initialize = () => {
   const interval = setInterval(() => {
     if(is_new_timestamp(mtime)) {
       clearInterval(interval)
-      console.log(get_file_timestamp())
       console.log(`end time: ${get_file_timestamp()}`)
       push().then(process.exit)
     }
