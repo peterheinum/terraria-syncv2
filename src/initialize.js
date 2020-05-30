@@ -31,5 +31,5 @@ const initialize = () => {
   }, 5000)
 }
 
-
-pull().then(go_back).then(initialize)
+initialize()
+// pull().then(go_back).then(initialize)
