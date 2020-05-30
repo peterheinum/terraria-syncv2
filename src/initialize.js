@@ -22,14 +22,12 @@ const initialize = () => {
   console.log(`start time: ${mtime}`)
   start_terraria()
   
-  const interval = setInterval(() => {
+  setInterval(() => {
     if(is_new_timestamp(mtime)) {
-      clearInterval(interval)
-      console.log(`end time: ${get_file_timestamp().mtime}`)
-      push().then(process.exit)
+      console.log(`synced at: ${get_file_timestamp().mtime}`)
+      push()
     }
   }, 5000)
 }
 
-initialize()
-// pull().then(go_back).then(initialize)
+pull().then(go_back).then(initialize)
