@@ -21,5 +21,7 @@ const push = () => copy_from_below()
   .then(push_code)
   .then(done)
 
-require.main == module && push()
-module.exports = { push }
+//require.main == module && push()
+//module.exports = { push }
+
+push()
