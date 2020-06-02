@@ -1,4 +1,4 @@
-# WELCOME
+# Walla ding dong
 
 ## Prerequisits
 1. Github account, added to your global user. (With password)
@@ -28,5 +28,5 @@ node src/initialize
 node src/push
 ```
 
-# Donations
-*please donate through swish at 0761347314*
+## Donations
+#### *please donate through swish at 0761347314*
