@@ -28,5 +28,5 @@ node src/initialize
 node src/push
 ```
 
-###### Donations
+# Donations
 *please donate through swish at 0761347314*
