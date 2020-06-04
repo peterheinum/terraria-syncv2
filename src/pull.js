@@ -12,9 +12,9 @@ const pullCode = () => shell.exec('git pull origin master')
 
 const pathToFile = `terraria-syncv2/${file}`
 
-const doneWithoutSync = () => {
-  console.log('Pull done without sync.')
-}
+const doneWithoutSync = () => console.log('Pull done without sync.')
+
+const doneWithSync = () => console.log('Pull done with sync')
 
 const copyToBelow = () => {
   shell.cd('..')
@@ -23,8 +23,9 @@ const copyToBelow = () => {
 }
 
 const shouldSync = () => {
-  const currentFolderTime = dateToEnGB(getTimestampCurrentFolder())
-  const folderBelowTime = dateToEnGB(getTimestampBelowFolder())
+  const currentFolderTime = getTimestampCurrentFolder()
+  const folderBelowTime = getTimestampBelowFolder()
+  
   return folderBelowTime < currentFolderTime ? Promise.resolve() : Promise.reject()
 }
 
@@ -34,11 +35,9 @@ const pull = () => new Promise((resolve, reject) => {
     .then(shouldSync)
     .then(wait)
     .then(copyToBelow)
-    .then(done)
-    .catch(() => {
-      doneWithoutSync()
-      resolve()
-    })
+    .then(doneWithSync)
+    .catch(doneWithoutSync)
+    .finally(resolve)
 })
 
 require.main == module && pull()
