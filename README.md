@@ -1,4 +1,4 @@
-# Walla ding dong
+# Terraria Sync v2 
 
 ## Prerequisits
 1. Github account, added to your global user. (With password)
@@ -29,4 +29,4 @@ node src/push
 ```
 
 ## Donations
-#### *please donate through swish at 0761347314 or 0736647293*
+#### *please donate through swish at 0761347314*
