@@ -2,32 +2,32 @@ require('dotenv').config()
 const opn = require('opn')
 const fs = require('fs')
 const shell = require('shelljs')
-const { file } = require('./shared')
+const { getTimestampBelowFolder } = require('./shared')
 const { push } = require('./push')
 const { pull } = require('./pull')
 
-const start_terraria = () => opn('steam://rungameid/105600')
-const get_file_timestamp = () => fs.statSync('../' + file + '.wld')
-const go_back = () => shell.cd('terraria-syncv2')
+const startTerraria = () => opn('steam://rungameid/105600')
 
-const is_new_timestamp = timestamp => {
-  const { mtime } = get_file_timestamp()
-  if(mtime.toString().includes('9:29')) return false
+const goBack = () => shell.cd('terraria-syncv2')
+
+const isNewTimestamp = timestamp => {
+  const time = getTimestampBelowFolder()
+  if(time.toString().includes('9:29')) return false
   
-  return mtime.toString() !== timestamp.toString()
+  return time.toString() !== timestamp.toString()
 }
 
 const initialize = () => {
-  const { mtime } = get_file_timestamp()
-  console.log(`start time: ${mtime}`)
-  start_terraria()
+  const time = getTimestampBelowFolder()
+  console.log(`start time: ${time}`)
+  startTerraria()
   
   setInterval(() => {
-    if(is_new_timestamp(mtime)) {
-      console.log(`synced at: ${get_file_timestamp().mtime}`)
+    if(isNewTimestamp(time)) {
+      console.log(`synced at: ${getTimestampBelowFolder()}`)
       push()
     }
   }, 5000)
 }
 
-pull().then(go_back).then(initialize)
+pull().then(goBack).then(initialize)
