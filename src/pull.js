@@ -22,11 +22,17 @@ const copyToBelow = () => {
   shell.cp(pathToFile + '.wld.bak', '.')
 }
 
+const shouldSync = () => {
+  const currentFolderTime = dateToEnGB(getTimestampCurrentFolder())
+  const folderBelowTime = dateToEnGB(getTimestampBelowFolder())
+  return folderBelowTime < currentFolderTime ? Promise.resolve() : Promise.reject()
+}
 
 const pull = () => new Promise((resolve, reject) => {
   wait()
-    // .then(pullCode)
-    // .then(wait)
+    .then(pullCode)
+    .then(shouldSync)
+    .then(wait)
     .then(copyToBelow)
     .then(done)
     .catch(() => {
@@ -35,17 +41,6 @@ const pull = () => new Promise((resolve, reject) => {
     })
 })
 
-// require.main == module && pull()
+require.main == module && pull()
 module.exports = { pull }
 
-const shouldSync = () => {
-  const currentFolderTime = dateToEnGB(getTimestampCurrentFolder())
-  const folderBelowTime = dateToEnGB(getTimestampBelowFolder())
-  return folderBelowTime < currentFolderTime
-}
-
-const lessTime = dateToEnGB(Date())
-setTimeout(() => {
-  const moreTIme = dateToEnGB(Date())
-  console.log(lessTime < moreTIme)
-}, 1000)
