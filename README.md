@@ -29,4 +29,4 @@ node src/push
 ```
 
 ## Donations
-#### *please donate through swish at 0761347314*
+#### *please donate through swish at 0761347314 or 0736647293*
