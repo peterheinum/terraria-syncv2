@@ -20,6 +20,7 @@ const copyToBelow = () => {
   shell.cd('..')
   shell.cp(pathToFile + '.wld', '.')
   shell.cp(pathToFile + '.wld.bak', '.')
+  shell.cp(pathToFile + '.wld.bak2', '.')
 }
 
 const shouldSync = () => {
